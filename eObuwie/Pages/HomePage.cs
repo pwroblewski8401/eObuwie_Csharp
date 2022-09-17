@@ -13,6 +13,7 @@ namespace eObuwie.Pages
 
             PageFactory.InitElements(driver, this);
 
+            Thread.Sleep(5000);
 
             if (ifAgreementIsVisble() == true)
             {

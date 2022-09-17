@@ -16,7 +16,7 @@ namespace eObuwie.Test
         {
             Pages.HomePage hp = new Pages.HomePage(driver);
             Pages.SearchPage sp = hp.searchForText("J311538C Black");
-            Pages.ProductPage pp = sp.clicElement(0);
+            Pages.ProductPage pp = sp.clickSelectProduct(0);
 
             if (pp.getSKU() == string.Empty)
             {

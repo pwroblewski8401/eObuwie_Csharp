@@ -3,8 +3,11 @@ namespace eObuwie.Pages
 {
     public class TestPage
     {
-        public TestPage()
+        IWebDriver driver;
+        public TestPage(IWebDriver driver)
         {
+            this.driver = driver;
+            PageFactory.InitElements(driver, this);
         }
     }
 }

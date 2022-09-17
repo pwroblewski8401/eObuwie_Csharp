@@ -18,9 +18,13 @@ namespace eObuwie.Pages
         [CacheLookup]
         private IList<IWebElement> itemsList;
 
+        [FindsBy(How = How.ClassName, Using = "filter-grid__link")]
+        [CacheLookup]
+        private IList<IWebElement> sizeSelector;
 
 
-        public ProductPage clicElement(int index)
+
+        public ProductPage clickSelectProduct(int index)
         {
             itemsList[index].Click();
             return new ProductPage(driver);
@@ -36,6 +40,40 @@ namespace eObuwie.Pages
                 a++;
             }
         }
+
+        public Dictionary<string, IWebElement> getSizesList()
+        {
+            Dictionary<string, IWebElement> sizes = new Dictionary<string, IWebElement>(); ;
+
+            foreach(IWebElement i in sizeSelector)
+            {
+                string sizeTXT = i.GetAttribute("innerHTML");
+                StringAssert.IsMatch(String.Empty, sizeTXT, "ERR: size string is empty!");
+
+                sizes.Add(sizeTXT, i);
+            }
+
+            return sizes;
+        }
+
+        public SearchPage selectSize(string sizeName)
+        {
+            Dictionary<string, IWebElement> sizes = getSizesList();
+
+            foreach(KeyValuePair<string, IWebElement> element in sizes)
+            {
+                if (element.Key.Contains(sizeName))
+                {
+                    element.Value.Click();
+                    return new SearchPage(driver);
+                }
+            }
+
+            Console.WriteLine("ERR: NO SIZE SELECTED!");
+            return new SearchPage(driver);
+        }
+
+
 
 
     }
