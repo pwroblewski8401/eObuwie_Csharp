@@ -23,7 +23,7 @@ namespace eObuwie.Test
                 Assert.True(false, "SKU IS NULL!!");
             }
             else
-                StringAssert.IsMatch(pp.getSKU(), "0000200688015", "SKU match gven SKU: 0000200688015");
+                StringAssert.IsMatch("0000200688015", pp.getSKU(), "SKU match gven SKU: 0000200688015");
 
         }
 
