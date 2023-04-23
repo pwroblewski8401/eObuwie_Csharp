@@ -43,14 +43,19 @@ namespace eObuwie.Pages
 
         public Dictionary<string, IWebElement> getSizesList()
         {
-            Dictionary<string, IWebElement> sizes = new Dictionary<string, IWebElement>(); ;
+            Dictionary<string, IWebElement> sizes = new Dictionary<string, IWebElement>();
 
             foreach(IWebElement i in sizeSelector)
             {
                 string sizeTXT = i.GetAttribute("innerHTML");
                 StringAssert.IsMatch(String.Empty, sizeTXT, "ERR: size string is empty!");
 
-                sizes.Add(sizeTXT, i);
+                if (sizes.ContainsKey(sizeTXT))
+                {
+                    Console.WriteLine("ERR: DUPLICATED KEY " + sizeTXT);
+                }
+                else
+                    sizes.Add(sizeTXT, i);
             }
 
             return sizes;
